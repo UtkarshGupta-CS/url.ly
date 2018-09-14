@@ -7,6 +7,6 @@ export default gql`
   }
 
   type Query {
-    urls: [Url]
+    getUrls: [Url]
   }
 `;

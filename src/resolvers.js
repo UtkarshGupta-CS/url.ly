@@ -16,7 +16,7 @@ const urls = [
 // schema.  We'll retrieve urls from the "urls" array above.
 const resolvers = {
   Query: {
-    urls: () => urls
+    getUrls: () => urls
   }
 };
 

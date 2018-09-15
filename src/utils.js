@@ -3,7 +3,7 @@
  * Ref: https://github.com/aappleby/smhasher
  */
 
-function murmurhash3(key, seed) {
+export function murmurhash3(key, seed) {
   var remainder, bytes, h1, h1b, c1, c2, k1, i;
 
   remainder = key.length & 3; // key.length % 4

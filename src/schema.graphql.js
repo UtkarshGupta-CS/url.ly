@@ -9,4 +9,8 @@ export default gql`
   type Query {
     getUrls: [Url]
   }
+
+  type Mutation {
+    genrateShortUrl(longUrl: String!): Url
+  }
 `;

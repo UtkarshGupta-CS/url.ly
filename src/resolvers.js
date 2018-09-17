@@ -3,7 +3,7 @@
 import { murmurhash3 } from "./utils";
 
 // Resolvers define the technique for fetching the types in the
-// schema.  We'll retrieve urls from the "urls" array above.
+// schema.
 const resolvers = {
   Query: {
     getUrls: () => [],

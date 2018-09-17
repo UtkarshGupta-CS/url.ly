@@ -8,6 +8,7 @@ export default gql`
 
   type Query {
     getUrls: [Url]
+    getLongUrl(shortUrl: String!): Url
   }
 
   type Mutation {

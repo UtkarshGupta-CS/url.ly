@@ -4,7 +4,7 @@ import { murmurhash3 } from "./utils";
 
 // Resolvers define the technique for fetching the types in the
 // schema.
-const resolvers = {
+const resolvers = client => ({
   Query: {
     getUrls: () => [],
     getLongUrl: (obj, params, context, info) => {
@@ -17,12 +17,15 @@ const resolvers = {
 
   Mutation: {
     genrateShortUrl: (_, params, context) => {
+      const longUrl = params.longUrl;
+      const shortUrl = murmurhash3(params.longUrl, 1).toString();
+      client.set(longUrl, shortUrl);
       return {
-        longUrl: params.longUrl,
-        shortUrl: murmurhash3(params.longUrl, 1).toString()
+        longUrl,
+        shortUrl
       };
     }
   }
-};
+});
 
 export default resolvers;

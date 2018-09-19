@@ -19,7 +19,7 @@ const resolvers = client => ({
     genrateShortUrl: (_, params, context) => {
       const longUrl = params.longUrl;
       const shortUrl = murmurhash3(params.longUrl, 1).toString();
-      client.set(longUrl, shortUrl);
+      client.set(`shorturl:${shortUrl}`, longUrl);
       return {
         longUrl,
         shortUrl

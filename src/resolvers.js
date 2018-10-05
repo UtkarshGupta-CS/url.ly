@@ -1,24 +1,27 @@
 // Resolvers define the technique for fetching the types in the
 // schema.
-const { promisify } = require("util");
 import { murmurhash3 } from "./utils";
 
 // Resolvers define the technique for fetching the types in the
 // schema.
 const resolvers = client => {
-  const getAsync = promisify(client.get).bind(client);
   return {
     Query: {
       getUrls: () => [],
-      getLongUrl: async (obj, params, context, info) => {
+      getLongUrl: (obj, params, context, info) => {
         let longUrl = "";
-        const isKeyExist = await getAsync(`shorturl:${params.shortUrl}`).then(
-          res => {
-            longUrl = res.toString();
-            console.log(longUrl);
+        const isKeyExist = client.get(
+          `shorturl:${params.shortUrl}`,
+          (err, res) => {
+            if (err) throw err;
+
+            if (res !== null) {
+              longUrl = res.toString();
+            }
+            console.log(res);
           }
         );
-        console.log(longUrl);
+        console.log(longUrl, isKeyExist);
         if (isKeyExist) {
           return {
             longUrl,
